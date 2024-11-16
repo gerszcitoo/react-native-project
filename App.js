@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+//clase 14/10 00:45:00
+import { StatusBar } from "expo-status-bar";
+import Navigator from "./src/navigation/Navigator";
+import { useEffect, useState } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [loaded, error] = useFonts({
+    "Bungee Shade": require("./assets/fonts/BungeeShade-Regular.ttf"),
+  });
+
+  useEffect(() => {
+    if (loaded || error) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if (!loaded && !error) {
+    return null;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {/* {productId ? (
+        <ProductScreen productId={productId} setProductId={setProductId} />
+      ) : category ? (
+        <ProductsScreen
+          category={category}
+          setCategory={setCategory}
+          setProductId={setProductId}
+        />
+      ) : (
+        <>
+          <Header />
+          <CategoriesScreen setCategory={setCategory} />
+        </>
+      )} */}
+      <Navigator />
+      <StatusBar style="light" />
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

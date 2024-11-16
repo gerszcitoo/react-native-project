@@ -1,0 +1,87 @@
+[
+  {
+    "id": 1,
+    "title": "Todos",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 2,
+    "title": "Aventura",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 3,
+    "title": "Cooperativo",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 4,
+    "title": "Estrategia",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 5,
+    "title": "Gestión de Recursos",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 6,
+    "title": "Comercio",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 7,
+    "title": "Cartas",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 8,
+    "title": "Combate",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 9,
+    "title": "Familiar",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 10,
+    "title": "Deducción",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 11,
+    "title": "Fiesta",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 12,
+    "title": "Exploración",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 13,
+    "title": "Creatividad",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 14,
+    "title": "Horror",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 15,
+    "title": "Economía",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 16,
+    "title": "Narrativa",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  },
+  {
+    "id": 17,
+    "title": "Naturaleza",
+    "image": "https://dummyimage.com/600x400/000/fff"
+  }
+]
