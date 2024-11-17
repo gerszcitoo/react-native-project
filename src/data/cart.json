@@ -1,0 +1,53 @@
+[
+  {
+    "id": 21,
+    "title": "Carcassonne",
+    "shortDescription": "Juego de colocación de losetas en un paisaje medieval.",
+    "longDescription": "Los jugadores colocan losetas para construir un paisaje y puntuar con sus seguidores en ciudades, caminos y campos.",
+    "price": 35,
+    "stock": 350,
+    "tutorial": "https://www.youtube.com/watch?v=8jWYANr7jf4",
+    "category": "Familiar, Estrategia",
+    "estimatedTime": "35-45 minutos",
+    "players": "2-5",
+    "ages": "7+",
+    "discount": 0,
+    "tags": ["familia", "estrategia"],
+    "image": "https://i.postimg.cc/xCK3ZGNg/Carcassonne.png",
+    "quantity": 1
+  },
+  {
+    "id": 27,
+    "title": "Dr. Eureka",
+    "shortDescription": "Juego de creación de pociones y riesgo.",
+    "longDescription": "Los jugadores son cientificos locos que crean pociones en un juego de mesa de rapidez y agilidad.",
+    "price": 15,
+    "stock": 160,
+    "tutorial": "https://www.youtube.com/watch?v=TbhRTpuHZek",
+    "category": "Familiar, Estrategia",
+    "estimatedTime": "10-20 minutos",
+    "players": "2-4",
+    "ages": "6+",
+    "discount": 0,
+    "tags": ["familia", "destreza"],
+    "image": "https://i.postimg.cc/xCSKLkpm/Dr-Eureka.png",
+    "quantity": 2
+  },
+  {
+    "id": 4,
+    "title": "Catan",
+    "shortDescription": "Juego de comercio y desarrollo en la isla de Catan.",
+    "longDescription": "Los jugadores colonizan una isla rica en recursos a través del comercio y la construcción de asentamientos.",
+    "price": 40,
+    "stock": 400,
+    "tutorial": "https://www.youtube.com/watch?v=mDgDnTV101M",
+    "category": "Estrategia, Comercio",
+    "estimatedTime": "60-120 minutos",
+    "players": "3-4",
+    "ages": "10+",
+    "discount": 5,
+    "tags": ["clásico", "estrategia", "comercio"],
+    "image": "https://i.postimg.cc/ZnHFbTcd/Catan.png",
+    "quantity": 1
+  }
+]

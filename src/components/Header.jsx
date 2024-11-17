@@ -14,7 +14,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 150,
+    height: 130,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.rojoPersa,
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: colors.blanco,
     fontFamily: "Bungee Shade",
+    marginBottom: -20,
   },
   headerSubTitle: {
     fontSize: 18,

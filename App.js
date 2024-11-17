@@ -1,9 +1,9 @@
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-//clase 14/10 01:14:30
+//clase 21/10 00:07:45
 import { StatusBar } from "expo-status-bar";
-import Navigator from "./src/navigation/Navigator";
 import { useEffect, useState } from "react";
+import TabNavigator from "./src/navigation/TabNavigator";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,7 +24,7 @@ export default function App() {
 
   return (
     <>
-      <Navigator />
+      <TabNavigator />
       <StatusBar style="light" />
     </>
   );
