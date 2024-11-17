@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-//clase 14/10 00:45:00
+//clase 14/10 01:14:30
 import { StatusBar } from "expo-status-bar";
 import Navigator from "./src/navigation/Navigator";
 import { useEffect, useState } from "react";
@@ -24,20 +24,6 @@ export default function App() {
 
   return (
     <>
-      {/* {productId ? (
-        <ProductScreen productId={productId} setProductId={setProductId} />
-      ) : category ? (
-        <ProductsScreen
-          category={category}
-          setCategory={setCategory}
-          setProductId={setProductId}
-        />
-      ) : (
-        <>
-          <Header />
-          <CategoriesScreen setCategory={setCategory} />
-        </>
-      )} */}
       <Navigator />
       <StatusBar style="light" />
     </>

@@ -73,9 +73,9 @@ const ProductsScreen = ({ navigation, route }) => {
                 <Text style={styles.tags}>Tags: {item.tags.join(", ")}</Text>
               </View>
               {item.discount > 0 && (
-                <Text style={styles.discount}>Descuento: {item.discount}%</Text>
+                <Text style={styles.discount}>DESCUENTO: {item.discount}%</Text>
               )}
-              {item.stock <= 0 && <Text style={styles.noStock}>Sin stock</Text>}
+              {item.stock <= 0 && <Text style={styles.noStock}>SIN STOCK</Text>}
               {item.stock <= 10 && item.stock > 0 && (
                 <Text style={styles.lastUnits}>ULTIMAS UNIDADES</Text>
               )}
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     width: "72%",
   },
   productTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 5,
   },
@@ -142,26 +142,37 @@ const styles = StyleSheet.create({
   },
   discount: {
     marginTop: 8,
-    fontSize: 15,
-    color: colors.verdeJade,
+    fontSize: 14,
+    color: colors.blanco,
+    fontWeight: "bold",
+    padding: 8,
+    backgroundColor: colors.verdeJade,
+    alignSelf: "flex-start",
+    borderRadius: 20,
   },
   noStock: {
     marginTop: 8,
-    fontSize: 15,
-    color: colors.rojoPersa,
+    fontSize: 14,
+    color: colors.blanco,
+    fontWeight: "bold",
+    padding: 8,
+    backgroundColor: colors.rojoPersa,
+    alignSelf: "flex-start",
+    borderRadius: 20,
   },
   lastUnits: {
     marginTop: 8,
-    fontSize: 15,
+    fontSize: 14,
     color: colors.negro,
     fontWeight: "bold",
     padding: 8,
     backgroundColor: colors.amarilloAzafran,
     alignSelf: "flex-start",
+    borderRadius: 20,
   },
   price: {
     marginTop: 8,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
   },
   goBack: {
