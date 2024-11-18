@@ -9,19 +9,25 @@ import {
 } from "react-native";
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import products from "../data/products.json";
+//import products from "../data/products.json";
 import { useEffect, useState } from "react";
 import { WebView } from "react-native-webview";
+import { useSelector } from "react-redux";
 
 const ProductScreen = ({ navigation, route }) => {
   const [productFound, setProductFound] = useState({});
 
-  const productId = route.params;
-
   const { width, height } = useWindowDimensions();
 
+  const productId = useSelector(
+    (state) => state.shopReducer.value.productIdSelected
+  );
+  const product = useSelector((state) =>
+    state.shopReducer.value.products.find((prod) => prod.id === productId)
+  );
+
   useEffect(() => {
-    setProductFound(products.find((product) => product.id === productId));
+    setProductFound(product);
   }, [productId]);
 
   return (

@@ -6,30 +6,28 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import products from "../data/products.json";
 import FlatCard from "../components/FlatCard";
 import { colors } from "../global/colors";
 import { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Search from "../components/Search";
+import { useSelector, useDispatch } from "react-redux";
+import { setProductIdSelected } from "../features/shop/shopSlice";
 
 const ProductsScreen = ({ navigation, route }) => {
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState("");
 
-  const category = route.params;
+  const dispatch = useDispatch();
 
-  function filterProducts(products, category, search) {
-    let filteredProducts = products;
+  const productsFilteredByCategory = useSelector(
+    (state) => state.shopReducer.value.productsFilteredByCategory
+  );
 
-    if (category !== "Todos") {
-      filteredProducts = products.filter((product) =>
-        product.category.includes(category)
-      );
-    }
-
+  function filterProducts(products) {
+    setProductsFiltered(products);
     if (search) {
-      filteredProducts = filteredProducts.filter(
+      const productsTempSearched = products.filter(
         (product) =>
           product.title.toLowerCase().includes(search.toLowerCase()) ||
           product.shortDescription
@@ -42,19 +40,22 @@ const ProductsScreen = ({ navigation, route }) => {
             tag.toLowerCase().includes(search.toLowerCase())
           )
       );
+      setProductsFiltered(productsTempSearched);
     }
-
-    return filteredProducts;
   }
 
   useEffect(() => {
-    const filteredProducts = filterProducts(products, category, search);
-    setProductsFiltered(filteredProducts);
-  }, [category, search, products]);
+    filterProducts(productsFilteredByCategory);
+  }, [search, productsFilteredByCategory]);
 
   const renderProductItem = ({ item }) => {
     return (
-      <Pressable onPress={() => navigation.navigate("Producto", item.id)}>
+      <Pressable
+        onPress={() => {
+          dispatch(setProductIdSelected(item.id));
+          navigation.navigate("Producto");
+        }}
+      >
         <View style={styles.productCardContainer}>
           <FlatCard style={styles.productContainer}>
             <View>
@@ -93,7 +94,7 @@ const ProductsScreen = ({ navigation, route }) => {
         <Icon name="arrow-back" style={styles.goBack} size={30} />
       </Pressable>
       <Search setSearch={setSearch} />
-      {productsFiltered == "" ? (
+      {productsFilteredByCategory.length === 0 ? (
         <Text style={styles.notFound}>No encontramos nada :(</Text>
       ) : (
         <FlatList

@@ -3,6 +3,7 @@ import FlatCard from "../components/FlatCard";
 import receipts from "../data/receipts.json";
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { useSelector } from "react-redux";
 
 const ReceiptScreen = () => {
   const renderReceiptItem = ({ item }) => {
