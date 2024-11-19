@@ -20,14 +20,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.rojoPersa,
   },
   headerTitle: {
-    fontSize: 26,
+    fontSize: 36,
     color: colors.blanco,
-    fontFamily: "Bungee Shade",
-    marginBottom: -20,
+    fontFamily: "Slackey",
+    paddingTop: 40,
   },
   headerSubTitle: {
     fontSize: 18,
     color: colors.blanco,
-    fontFamily: "Bungee Shade",
+    fontFamily: "Slackey",
   },
 });

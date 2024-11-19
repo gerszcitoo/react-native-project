@@ -30,13 +30,6 @@ export const shopSlice = createSlice({
     setProductIdSelected: (state, action) => {
       state.value.productIdSelected = action.payload; // Actualiza el ID del producto seleccionado
     },
-    /* setProductId: (state, action) => {
-      //item.id es el action.payload
-      state.value.productIdSelected = state.value.productIdSelected.filter(
-        (product) => product.id === action.payload
-      );
-      state.value.productIdSelected = action.payload;
-    }, */
   },
 });
 

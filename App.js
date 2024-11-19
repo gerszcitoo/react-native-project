@@ -11,7 +11,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loaded, error] = useFonts({
-    "Bungee Shade": require("./assets/fonts/BungeeShade-Regular.ttf"),
+    Slackey: require("./assets/fonts/Slackey-Regular.ttf"),
   });
 
   useEffect(() => {

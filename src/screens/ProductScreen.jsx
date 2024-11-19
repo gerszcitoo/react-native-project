@@ -50,12 +50,6 @@ const ProductScreen = ({ navigation, route }) => {
           resizeMode="contain"
           style={styles.productImage}
         />
-        <Text style={styles.longDescription}>
-          {productFound.longDescription}
-        </Text>
-        {productFound.tags && (
-          <Text style={styles.tags}>Tags: {productFound.tags.join(", ")}</Text>
-        )}
         {productFound.discount > 0 && (
           <Text style={styles.discount}>
             DESCUENTO: {productFound.discount}%
@@ -66,6 +60,15 @@ const ProductScreen = ({ navigation, route }) => {
         )}
         {productFound.stock <= 10 && productFound.stock > 0 && (
           <Text style={styles.lastUnits}>ULTIMAS UNIDADES</Text>
+        )}
+        <Text style={styles.shortDescription}>
+          {productFound.shortDescription}
+        </Text>
+        <Text style={styles.longDescription}>
+          {productFound.longDescription}
+        </Text>
+        {productFound.tags && (
+          <Text style={styles.tags}>Tags: {productFound.tags.join(", ")}</Text>
         )}
       </ScrollView>
       <View style={styles.priceContainer}>
@@ -115,12 +118,9 @@ const styles = StyleSheet.create({
     color: colors.grisMedio,
     maxWidth: 100,
   },
-  longDescription: {
-    fontSize: 16,
-    paddingVertical: 8,
-  },
+
   discount: {
-    marginTop: 8,
+    marginBottom: 8,
     fontSize: 15,
     color: colors.blanco,
     fontWeight: "bold",
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   noStock: {
-    marginTop: 8,
+    marginBottom: 8,
     fontSize: 15,
     color: colors.blanco,
     fontWeight: "bold",
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   lastUnits: {
-    marginTop: 8,
+    marginBottom: 8,
     fontSize: 15,
     color: colors.negro,
     fontWeight: "bold",
@@ -149,6 +149,16 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     borderRadius: 20,
   },
+
+  shortDescription: {
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  longDescription: {
+    fontSize: 16,
+    paddingVertical: 8,
+  },
+
   priceContainer: {
     backgroundColor: colors.blanco,
     borderTopRightRadius: 20,
