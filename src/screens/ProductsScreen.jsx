@@ -5,6 +5,7 @@ import {
   View,
   Image,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import FlatCard from "../components/FlatCard";
 import { colors } from "../global/colors";
@@ -12,17 +13,34 @@ import { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Search from "../components/Search";
 import { useSelector, useDispatch } from "react-redux";
-import { setProductIdSelected } from "../features/shop/shopSlice";
+import {
+  setProductIdSelected,
+  setProducts,
+  setCategory,
+} from "../features/shop/shopSlice";
+import { useGetProductsQuery } from "../services/shopService";
 
-const ProductsScreen = ({ navigation, route }) => {
+const ProductsScreen = ({ navigation }) => {
   const [productsFiltered, setProductsFiltered] = useState([]);
   const [search, setSearch] = useState("");
 
   const dispatch = useDispatch();
 
+  const { data: products, error, isLoading } = useGetProductsQuery();
   const productsFilteredByCategory = useSelector(
     (state) => state.shopReducer.value.productsFilteredByCategory
   );
+  // Obtén la categoría seleccionada actual
+  const categorySelected = useSelector(
+    (state) => state.shopReducer.value.categorySelected
+  );
+
+  useEffect(() => {
+    if (products && products.length > 0) {
+      dispatch(setProducts(products));
+      dispatch(setCategory(categorySelected || "todos"));
+    }
+  }, [products]);
 
   function filterProducts(products) {
     setProductsFiltered(products);
@@ -46,7 +64,7 @@ const ProductsScreen = ({ navigation, route }) => {
 
   useEffect(() => {
     filterProducts(productsFilteredByCategory);
-  }, [search, productsFilteredByCategory]);
+  }, [productsFilteredByCategory, search]);
 
   const renderProductItem = ({ item }) => {
     return (
@@ -94,12 +112,18 @@ const ProductsScreen = ({ navigation, route }) => {
         <Icon name="arrow-back" style={styles.goBack} size={30} />
       </Pressable>
       <Search setSearch={setSearch} />
-      {productsFilteredByCategory.length === 0 ? (
+      {isLoading ? (
+        <ActivityIndicator size="large" color={colors.azulCielo} />
+      ) : error ? (
+        <Text style={styles.loadError}>
+          Error al cargar los productos, inténtelo nuevamente
+        </Text>
+      ) : productsFilteredByCategory.length === 0 ? (
         <Text style={styles.notFound}>No encontramos nada :(</Text>
       ) : (
         <FlatList
           data={productsFiltered}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={renderProductItem}
         />
       )}
@@ -184,5 +208,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     color: colors.rojoPersa,
     textAlign: "center",
+  },
+  loadError: {
+    textAlign: "center",
+    fontSize: 24,
+    color: colors.rojoPersa,
   },
 });

@@ -1,10 +1,21 @@
-import { StyleSheet, Text, FlatList, Image, Pressable } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  Image,
+  Pressable,
+  ActivityIndicator,
+} from "react-native";
 import FlatCard from "../components/FlatCard";
 import { useSelector, useDispatch } from "react-redux";
 import { setCategory } from "../features/shop/shopSlice";
+import { useGetCategoriesQuery } from "../services/shopService";
+import { colors } from "../global/colors";
 
 const CategoriesScreen = ({ navigation }) => {
-  const categories = useSelector((state) => state.shopReducer.value.categories);
+  //const categories = useSelector((state) => state.shopReducer.value.categories);
+
+  const { data: categories, error, isLoading } = useGetCategoriesQuery();
 
   const dispatch = useDispatch();
 
@@ -36,11 +47,20 @@ const CategoriesScreen = ({ navigation }) => {
 
   return (
     <>
-      <FlatList
-        data={categories}
-        keyExtractor={(item) => item.id}
-        renderItem={renderCategoryItem}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color={colors.azulCielo} />
+      ) : error ? (
+        <Text style={styles.loadError}>
+          {" "}
+          Error al cargar las categorías, inténtelo nuevamente
+        </Text>
+      ) : (
+        <FlatList
+          data={categories}
+          keyExtractor={(item) => item.id}
+          renderItem={renderCategoryItem}
+        />
+      )}
     </>
   );
 };
@@ -69,5 +89,10 @@ const styles = StyleSheet.create({
   },
   rowReverse: {
     flexDirection: "row-reverse",
+  },
+  loadError: {
+    textAlign: "center",
+    fontSize: 24,
+    color: colors.rojoPersa,
   },
 });

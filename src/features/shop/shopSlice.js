@@ -1,13 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import categories from "../../data/categories.json";
-import products from "../../data/products.json";
 
 export const shopSlice = createSlice({
   name: "shop",
   initialState: {
     value: {
-      categories: categories,
-      products: products,
+      products: [],
       categorySelected: "",
       productsFilteredByCategory: [],
       productIdSelected: null,
@@ -27,12 +24,25 @@ export const shopSlice = createSlice({
       }
       state.value.categorySelected = action.payload;
     },
+
+    setProducts: (state, action) => {
+      state.value.products = action.payload;
+
+      // Inicializa productsFilteredByCategory con todos los productos si no hay categoría seleccionada
+      if (
+        !state.value.categorySelected ||
+        state.value.categorySelected === ""
+      ) {
+        state.value.productsFilteredByCategory = action.payload;
+      }
+    },
     setProductIdSelected: (state, action) => {
-      state.value.productIdSelected = action.payload; // Actualiza el ID del producto seleccionado
+      state.value.productIdSelected = action.payload;
     },
   },
 });
 
-export const { setCategory, setProductIdSelected } = shopSlice.actions;
+export const { setCategory, setProducts, setProductIdSelected } =
+  shopSlice.actions;
 
 export default shopSlice.reducer;

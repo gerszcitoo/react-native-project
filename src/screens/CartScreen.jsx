@@ -6,26 +6,31 @@ import {
   Image,
   Pressable,
 } from "react-native";
-import cart from "../data/cart.json";
+//import cart from "../data/cart.json";
 import FlatCard from "../components/FlatCard";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../global/colors";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const CartScreen = () => {
-  const [total, setTotal] = useState(0);
+  //const [total, setTotal] = useState(0);
 
-  useEffect(() => {
+  /* useEffect(() => {
     setTotal(
       cart.reduce((acum, item) => (acum += item.price * item.quantity), 0)
     );
-  }, [cart]);
+  }, [cart]); */
+
+  const cart = useSelector((state) => state.cartReducer.value.cartItems);
+  const total = useSelector((state) => state.cartReducer.value.total);
 
   const FooterComponent = () => (
     <View style={styles.footerContainer}>
       <Text style={styles.footerTotal}>Total: U$D {total} </Text>
       <Pressable style={styles.confirmButton}>
         <Text style={styles.confirmButtonText}>Confirmar</Text>
+        {/* vaciar carrito onpress */}
       </Pressable>
     </View>
   );
@@ -47,12 +52,15 @@ const CartScreen = () => {
         <Text style={styles.total}>
           Subtotal: U$D {item.quantity * item.price}
         </Text>
-        <Icon
-          name="delete"
-          size={24}
-          color={colors.rojoPersa}
-          style={styles.trashIcon}
-        />
+        <Pressable onPress={null}>
+          {/* cambiar */}
+          <Icon
+            name="delete"
+            size={24}
+            color={colors.rojoPersa}
+            style={styles.trashIcon}
+          />
+        </Pressable>
       </View>
     </FlatCard>
   );

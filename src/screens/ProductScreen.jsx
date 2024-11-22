@@ -9,15 +9,17 @@ import {
 } from "react-native";
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
-//import products from "../data/products.json";
 import { useEffect, useState } from "react";
 import { WebView } from "react-native-webview";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../features/cart/cartSlice";
 
 const ProductScreen = ({ navigation, route }) => {
   const [productFound, setProductFound] = useState({});
 
   const { width, height } = useWindowDimensions();
+
+  const dispatch = useDispatch();
 
   const productId = useSelector(
     (state) => state.shopReducer.value.productIdSelected
@@ -74,7 +76,8 @@ const ProductScreen = ({ navigation, route }) => {
       <View style={styles.priceContainer}>
         <Text style={styles.price}>U$D {productFound.price}</Text>
         <Pressable
-          onPress={null}
+          onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}
+          //cambiar con contador
           style={({ pressed }) => [
             { opacity: pressed ? 0.8 : 1 },
             styles.addToCartButton,
