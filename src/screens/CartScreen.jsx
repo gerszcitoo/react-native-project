@@ -11,26 +11,29 @@ import FlatCard from "../components/FlatCard";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../global/colors";
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { usePostReceiptMutation } from "../services/receiptService";
+import { clearCart } from "../features/cart/cartSlice";
 
-const CartScreen = () => {
-  //const [total, setTotal] = useState(0);
-
-  /* useEffect(() => {
-    setTotal(
-      cart.reduce((acum, item) => (acum += item.price * item.quantity), 0)
-    );
-  }, [cart]); */
-
+const CartScreen = ({ navigation }) => {
   const cart = useSelector((state) => state.cartReducer.value.cartItems);
   const total = useSelector((state) => state.cartReducer.value.total);
+  const [triggerPost, result] = usePostReceiptMutation();
+  console.log(cart.length);
+  const dispatch = useDispatch();
 
   const FooterComponent = () => (
     <View style={styles.footerContainer}>
       <Text style={styles.footerTotal}>Total: U$D {total} </Text>
-      <Pressable style={styles.confirmButton}>
+      <Pressable
+        style={styles.confirmButton}
+        onPress={() => {
+          triggerPost({ cart, total, createdAt: Date.now() });
+          dispatch(clearCart());
+          navigation.navigate("Receipts");
+        }}
+      >
         <Text style={styles.confirmButtonText}>Confirmar</Text>
-        {/* vaciar carrito onpress */}
       </Pressable>
     </View>
   );
@@ -65,6 +68,10 @@ const CartScreen = () => {
     </FlatCard>
   );
   return (
+    /* {
+      ?
+      <Text>No hay productos en el carrito</Text>
+      : */
     <FlatList
       data={cart}
       keyExtractor={(item) => item.id}
@@ -74,6 +81,7 @@ const CartScreen = () => {
       }
       ListFooterComponent={<FooterComponent />}
     />
+    /*  } */
   );
 };
 

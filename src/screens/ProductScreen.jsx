@@ -10,7 +10,8 @@ import {
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-import { WebView } from "react-native-webview";
+// usar react-native-youtube-iframe
+import { useGetProductQuery } from "../services/shopService";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
 
