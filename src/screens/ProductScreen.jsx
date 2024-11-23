@@ -10,7 +10,7 @@ import {
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
-// usar react-native-youtube-iframe
+import YoutubePlayer from "react-native-youtube-iframe";
 import { useGetProductQuery } from "../services/shopService";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
@@ -73,6 +73,14 @@ const ProductScreen = ({ navigation, route }) => {
         {productFound.tags && (
           <Text style={styles.tags}>Tags: {productFound.tags.join(", ")}</Text>
         )}
+        <Text style={styles.tutorialText}>Tutorial: </Text>
+        <View style={styles.videoContainer}>
+          <YoutubePlayer
+            height={200}
+            videoId={productFound.tutorial}
+            play={false}
+          />
+        </View>
       </ScrollView>
       <View style={styles.priceContainer}>
         <Text style={styles.price}>U$D {productFound.price}</Text>
@@ -162,7 +170,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingVertical: 8,
   },
-
+  tutorialText: {
+    marginTop: 20,
+    fontFamily: "Slackey",
+    fontSize: 30,
+    textAlign: "center",
+  },
+  videoContainer: {
+    marginTop: 10,
+    marginBottom: 20,
+  },
   priceContainer: {
     backgroundColor: colors.blanco,
     borderTopRightRadius: 20,

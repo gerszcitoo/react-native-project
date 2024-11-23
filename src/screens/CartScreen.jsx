@@ -6,7 +6,6 @@ import {
   Image,
   Pressable,
 } from "react-native";
-//import cart from "../data/cart.json";
 import FlatCard from "../components/FlatCard";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { colors } from "../global/colors";
@@ -19,7 +18,6 @@ const CartScreen = ({ navigation }) => {
   const cart = useSelector((state) => state.cartReducer.value.cartItems);
   const total = useSelector((state) => state.cartReducer.value.total);
   const [triggerPost, result] = usePostReceiptMutation();
-  console.log(cart.length);
   const dispatch = useDispatch();
 
   const FooterComponent = () => (
@@ -68,20 +66,29 @@ const CartScreen = ({ navigation }) => {
     </FlatCard>
   );
   return (
-    /* {
-      ?
-      <Text>No hay productos en el carrito</Text>
-      : */
-    <FlatList
-      data={cart}
-      keyExtractor={(item) => item.id}
-      renderItem={renderCartItem}
-      ListHeaderComponent={
-        <Text style={styles.cartScreenTitle}>Tu carrito:</Text>
-      }
-      ListFooterComponent={<FooterComponent />}
-    />
-    /*  } */
+    <>
+      {cart.length === 0 ? (
+        <>
+          <Text style={styles.emptyCart}>No hay productos en el carrito</Text>
+          <Pressable
+            style={styles.buySomethingButton}
+            onPress={() => navigation.navigate("Shop")}
+          >
+            <Text style={styles.buySomething}>¡Compra algo!</Text>
+          </Pressable>
+        </>
+      ) : (
+        <FlatList
+          data={cart}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderCartItem}
+          ListHeaderComponent={
+            <Text style={styles.cartScreenTitle}>Tu carrito:</Text>
+          }
+          ListFooterComponent={<FooterComponent />}
+        />
+      )}
+    </>
   );
 };
 
@@ -147,5 +154,26 @@ const styles = StyleSheet.create({
     color: colors.blanco,
     fontSize: 16,
     fontWeight: "700",
+  },
+  emptyCart: {
+    color: colors.rojoPersa,
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  buySomethingButton: {
+    marginTop: 20,
+    padding: 10,
+    width: 150,
+    alignSelf: "center",
+    backgroundColor: colors.verdeJade,
+    borderRadius: 50,
+  },
+  buySomething: {
+    textAlign: "center",
+    fontWeight: "bold",
+    color: colors.blanco,
+    fontSize: 20,
   },
 });
