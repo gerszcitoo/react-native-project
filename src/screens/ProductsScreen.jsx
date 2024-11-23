@@ -30,7 +30,6 @@ const ProductsScreen = ({ navigation }) => {
   const productsFilteredByCategory = useSelector(
     (state) => state.shopReducer.value.productsFilteredByCategory
   );
-  // Obtén la categoría seleccionada actual
   const categorySelected = useSelector(
     (state) => state.shopReducer.value.categorySelected
   );

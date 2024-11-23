@@ -27,8 +27,6 @@ export const shopSlice = createSlice({
 
     setProducts: (state, action) => {
       state.value.products = action.payload;
-
-      // Inicializa productsFilteredByCategory con todos los productos si no hay categoría seleccionada
       if (
         !state.value.categorySelected ||
         state.value.categorySelected === ""

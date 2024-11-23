@@ -54,7 +54,6 @@ const CartScreen = ({ navigation }) => {
           Subtotal: U$D {item.quantity * item.price}
         </Text>
         <Pressable onPress={null}>
-          {/* cambiar */}
           <Icon
             name="delete"
             size={24}

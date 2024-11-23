@@ -3,6 +3,7 @@ import ShopNavigator from "./ShopNavigator";
 import CartNavigator from "./CartNavigator";
 import ReceiptsNavigator from "./ReceiptsNavigator";
 import ProfileNavigator from "./ProfileNavigator";
+import MyPlacesNavigator from "./MyPlacesNavigator";
 import { StyleSheet } from "react-native";
 import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -67,6 +68,19 @@ const TabNavigator = () => {
           tabBarIcon: ({ focused }) => (
             <Icon
               name="account-circle"
+              size={32}
+              color={focused ? colors.grisMedio : colors.grisClaro}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Places"
+        component={MyPlacesNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Icon
+              name="map"
               size={32}
               color={focused ? colors.grisMedio : colors.grisClaro}
             />

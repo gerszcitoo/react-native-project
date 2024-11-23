@@ -19,10 +19,9 @@ export const cartSlice = createSlice({
       if (!productInCart) {
         state.value.cartItems.push(action.payload);
       } else {
-        //evaluar sumar mas de un elemento al carrito. Ej +5 Catan
         state.value.cartItems.map((item) => {
           if (item.id === action.payload.id) {
-            item.quantity += 1; //reemplazaria 1 por variable con cantidad
+            item.quantity += 1;
             return item;
           }
           return item;

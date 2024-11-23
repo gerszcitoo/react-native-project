@@ -11,7 +11,6 @@ export const shopApi = createApi({
     getProducts: builder.query({
       query: () => "products.json",
     }),
-    //usar getProduct hecho en after 24/10
   }),
 });
 

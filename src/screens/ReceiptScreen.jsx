@@ -18,7 +18,6 @@ const ReceiptScreen = () => {
       hour: "2-digit",
       minute: "2-digit",
     };
-    //mostrar recibos
     return (
       <FlatCard style={styles.receiptContainer}>
         <Text style={styles.title}>Recibo nro: {item.id}</Text>

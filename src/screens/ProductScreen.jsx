@@ -86,7 +86,6 @@ const ProductScreen = ({ navigation, route }) => {
         <Text style={styles.price}>U$D {productFound.price}</Text>
         <Pressable
           onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}
-          //cambiar con contador
           style={({ pressed }) => [
             { opacity: pressed ? 0.8 : 1 },
             styles.addToCartButton,
@@ -185,7 +184,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
     paddingBottom: 10,
-    //corregir
     shadowColor: colors.negro,
     shadowOpacity: 1,
     shadowRadius: 1,
