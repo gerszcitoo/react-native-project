@@ -6,16 +6,20 @@ export const authSlice = createSlice({
     value: {
       email: null,
       token: null,
+      localId: "",
       profilePicture: "",
     },
   },
   reducers: {
     setUser: (state, action) => {
       (state.value.email = action.payload.email),
-        (state.value.token = action.payload.idToken);
+        (state.value.token = action.payload.idToken),
+        (state.value.localId = action.payload.localId);
     },
     clearUser: (state, action) => {
-      (state.value.email = null), (state.value.token = null);
+      (state.value.email = null),
+        (state.value.token = null),
+        (state.value.localId = null);
     },
     setProfilePicture: (state, action) => {
       state.value.profilePicture = action.payload;

@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-//clase 28/10 00.34.50
+//clase 04/11 00.00.00
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import MainNavigator from "./src/navigation/MainNavigator";
