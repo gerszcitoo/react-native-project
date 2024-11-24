@@ -32,7 +32,7 @@ const SignupScreen = ({ navigation }) => {
   };
   return (
     <LinearGradient
-      colors={["#009FFF", "#ec2F4B"]}
+      colors={["#6C0000", "#ec2F4B"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.gradient}
@@ -100,9 +100,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    color: colors.verdeJade,
+    color: colors.blanco,
     fontFamily: "Slackey",
-    fontSize: 32,
+    fontSize: 42,
   },
   subTitle: {
     fontFamily: "Slackey",
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   btn: {
     padding: 16,
     paddingHorizontal: 32,
-    backgroundColor: colors.azulCielo,
+    backgroundColor: colors.amarilloAzafran,
     borderRadius: 16,
     marginTop: 32,
   },

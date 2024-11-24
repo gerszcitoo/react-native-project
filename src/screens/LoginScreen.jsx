@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "../global/colors";
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { useState, useEffect } from "react";
 import { useLoginMutation } from "../services/authService";
 import { setUser } from "../features/auth/authSlice";
@@ -19,6 +20,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const [triggerLogin, result] = useLoginMutation();
+  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     if (result.status === "fulfilled") {
@@ -32,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <LinearGradient
-      colors={["#009FFF", "#ec2F4B"]}
+      colors={["#6C0000", "#ec2F4B"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.gradient}
@@ -53,6 +55,18 @@ const LoginScreen = ({ navigation }) => {
           style={styles.textInput}
           secureTextEntry
         />
+      </View>
+      <View style={styles.rememberMeContainer}>
+        <Text style={styles.whiteText}>Mantener sesión iniciada</Text>
+        {rememberMe ? (
+          <Pressable onPress={() => setRememberMe(!rememberMe)}>
+            <Icon name="toggle-on" size={48} color={colors.verdeJade} />
+          </Pressable>
+        ) : (
+          <Pressable onPress={() => setRememberMe(!rememberMe)}>
+            <Icon name="toggle-off" size={48} color={colors.grisClaro} />
+          </Pressable>
+        )}
       </View>
       <View style={styles.footTextContainer}>
         <Text style={styles.whiteText}>¿No tienes una cuenta?</Text>
@@ -93,9 +107,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    color: colors.verdeJade,
+    color: colors.blanco,
     fontFamily: "Slackey",
-    fontSize: 32,
+    fontSize: 42,
   },
   subTitle: {
     fontFamily: "Slackey",
@@ -134,7 +148,7 @@ const styles = StyleSheet.create({
   btn: {
     padding: 16,
     paddingHorizontal: 32,
-    backgroundColor: colors.azulCielo,
+    backgroundColor: colors.amarilloAzafran,
     borderRadius: 16,
     marginTop: 32,
   },
@@ -146,5 +160,12 @@ const styles = StyleSheet.create({
   guestOptionContainer: {
     alignItems: "center",
     marginTop: 64,
+  },
+  rememberMeContainer: {
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "space-around",
+    alignItems: "center",
+    marginVertical: 8,
   },
 });
