@@ -25,8 +25,10 @@ const MyPlacesScreen = () => {
       id: 1,
       title: "Punto de Partida - Café y juegos de mesa",
       coords: { latitude: -34.6026164, longitude: -58.4887645 },
+      address: "Avenida Nazca 2893, Cdad Autónoma de Buenos Aires, Argentina",
     },
   ]);
+  const [address, setAddress] = useState("");
 
   const showToast = (type, message) => {
     Toast.show({
@@ -67,6 +69,7 @@ const MyPlacesScreen = () => {
       </View>
       <View style={styles.placeDescriptionContainer}>
         <Text style={styles.mapTitle}>{item.title}</Text>
+        <Text style={styles.address}>{item.address}</Text>
       </View>
     </FlatCard>
   );
@@ -79,6 +82,14 @@ const MyPlacesScreen = () => {
     } else {
       let location = await Location.getCurrentPositionAsync();
       if (location) {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.coords.latitude},${location.coords.longitude}&key=${process.env.EXPO_PUBLIC_GEOCODING_API_KEY}`
+        );
+        const data = await response.json();
+        if (data.status === "OK") {
+          const formattedAddress = data.results[0].formatted_address;
+          setAddress(formattedAddress);
+        }
         showToast("success", "¡Ubicación obtenida!");
       } else {
         setErrorMsg("Error getting location");
@@ -89,14 +100,24 @@ const MyPlacesScreen = () => {
   };
 
   const savePlace = () => {
-    setPlaces((prevState) => [
-      ...prevState,
-      {
-        id: Math.random(),
-        title,
-        coords: { latitude: location.latitude, longitude: location.longitude },
-      },
-    ]);
+    if (location && title) {
+      setPlaces((prevState) => [
+        ...prevState,
+        {
+          id: Math.random(),
+          title,
+          coords: {
+            latitude: location.latitude,
+            longitude: location.longitude,
+          },
+          address,
+        },
+      ]);
+      setTitle("");
+      setLocation("");
+    } else {
+      showToast("error", "Complete la información de la ubicación");
+    }
   };
 
   return (
@@ -107,6 +128,7 @@ const MyPlacesScreen = () => {
           style={styles.textInput}
           placeholder="Ingresa un título"
           onChangeText={(text) => setTitle(text)}
+          value={title}
         />
         <Pressable onPress={getLocation}>
           <Icon name="location-on" color={colors.azulCielo} size={32} />
