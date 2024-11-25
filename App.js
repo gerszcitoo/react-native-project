@@ -8,9 +8,7 @@ import { store } from "./src/app/store";
 import { Provider } from "react-redux";
 import { createSessionsTable } from "./src/db";
 
-createSessionsTable()
-  .then((result) => console.log("tabla creada con exito", result))
-  .catch((error) => console.log("error al crear la tabla", error));
+createSessionsTable();
 
 SplashScreen.preventAutoHideAsync();
 

@@ -13,20 +13,72 @@ import { useState, useEffect } from "react";
 import { useLoginMutation } from "../services/authService";
 import { setUser } from "../features/auth/authSlice";
 import { useDispatch } from "react-redux";
+import {
+  initializeDatabase,
+  fetchSessions,
+  getActiveSession,
+  insertUniqueSession,
+} from "../db/index";
+
 const textInputWidth = Dimensions.get("window").width * 0.7;
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const [triggerLogin, result] = useLoginMutation();
   const [rememberMe, setRememberMe] = useState(false);
 
+  const dispatch = useDispatch();
+
+  const [triggerLogin, result] = useLoginMutation();
+
   useEffect(() => {
-    if (result.status === "fulfilled") {
+    const setupDatabase = async () => {
+      try {
+        await initializeDatabase();
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    setupDatabase();
+  }, []);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const session = await getActiveSession();
+        if (session) {
+          dispatch(setUser({ email: session.email, token: session.token }));
+        }
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    checkSession();
+  }, []);
+
+  useEffect(() => {
+    if (result.isSuccess) {
       dispatch(setUser(result.data));
+
+      if (rememberMe) {
+        const handleSession = async () => {
+          try {
+            await insertUniqueSession({
+              localId: result.data.localId,
+              email: result.data.email,
+              token: result.data.idToken,
+            });
+            const sessions = await fetchSessions();
+          } catch (error) {
+            throw error;
+          }
+        };
+        handleSession();
+      }
     }
-  }, [result]);
+  }, [result, rememberMe]);
 
   const onsubmit = () => {
     triggerLogin({ email, password });

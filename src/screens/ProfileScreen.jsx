@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, Image, Pressable } from "react-native";
-import { useState } from "react";
 import { colors } from "../global/colors";
 import CameraIcon from "../components/CameraIcon";
 import { useSelector, useDispatch } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
 import { setProfilePicture } from "../features/auth/authSlice";
 import { usePutProfilePictureMutation } from "../services/userService";
+import { clearSessions } from "../db/index";
+import { setUser } from "../features/auth/authSlice";
 
 const ProfileScreen = () => {
   const user = useSelector((state) => state.authReducer.value.email);
@@ -43,6 +44,15 @@ const ProfileScreen = () => {
     }
   };
 
+  const handleLogout = async () => {
+    try {
+      await clearSessions();
+      dispatch(setUser({ email: null, localId: "", token: null }));
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <View style={styles.profileContainer}>
       <View style={styles.imageProfileContainer}>
@@ -68,6 +78,9 @@ const ProfileScreen = () => {
         </Pressable>
       </View>
       <Text style={styles.profileData}>Email: {user}</Text>
+      <Pressable onPress={handleLogout} style={styles.logoutButton}>
+        <Text style={styles.logoutText}>Cerrar Sesión</Text>
+      </Pressable>
     </View>
   );
 };
@@ -105,5 +118,17 @@ const styles = StyleSheet.create({
     width: 128,
     height: 128,
     borderRadius: 128,
+  },
+  logoutButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: colors.rojoPersa,
+    borderRadius: 5,
+  },
+  logoutText: {
+    color: colors.blanco,
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
