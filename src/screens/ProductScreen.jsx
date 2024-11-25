@@ -82,18 +82,33 @@ const ProductScreen = ({ navigation, route }) => {
           />
         </View>
       </ScrollView>
-      <View style={styles.priceContainer}>
-        <Text style={styles.price}>U$D {productFound.price}</Text>
-        <Pressable
-          onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}
-          style={({ pressed }) => [
-            { opacity: pressed ? 0.8 : 1 },
-            styles.addToCartButton,
-          ]}
-        >
-          <Text style={styles.addToCartText}>Agregar al carrito</Text>
-        </Pressable>
-      </View>
+      {productFound.stock > 0 ? (
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>U$D {productFound.price}</Text>
+          <Pressable
+            onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.8 : 1 },
+              styles.addToCartButton,
+            ]}
+          >
+            <Text style={styles.addToCartText}>Agregar al carrito</Text>
+          </Pressable>
+        </View>
+      ) : (
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>Sin stock</Text>
+          <Pressable
+            onPress={() => navigation.goBack()}
+            style={({ pressed }) => [
+              { opacity: pressed ? 0.8 : 1 },
+              styles.backToStore,
+            ]}
+          >
+            <Text style={styles.viewMore}>¡Busca otro!</Text>
+          </Pressable>
+        </View>
+      )}
     </>
   );
 };
@@ -204,6 +219,19 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   addToCartText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: colors.blanco,
+  },
+  backToStore: {
+    padding: 8,
+    marginVertical: 10,
+    marginHorizontal: 34,
+    backgroundColor: colors.rojoPersa,
+    borderRadius: 16,
+  },
+  viewMore: {
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
