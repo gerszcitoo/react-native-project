@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: 150,
-    height: 80,
+    height: 130,
   },
   row: {
     flexDirection: "row",
