@@ -11,6 +11,7 @@ import { colors } from "../global/colors";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
+import Toast from "react-native-toast-message";
 import { useGetProductQuery } from "../services/shopService";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem } from "../features/cart/cartSlice";
@@ -22,12 +23,21 @@ const ProductScreen = ({ navigation, route }) => {
 
   const dispatch = useDispatch();
 
+  const showToast = (type, message) => {
+    Toast.show({
+      type: type,
+      text1: message,
+      visibilityTime: 2000,
+    });
+  };
+
   const productId = useSelector(
     (state) => state.shopReducer.value.productIdSelected
   );
   const product = useSelector((state) =>
     state.shopReducer.value.products.find((prod) => prod.id === productId)
   );
+  showToast("success", "¡Producto agregado al carrito!");
 
   useEffect(() => {
     setProductFound(product);
@@ -86,7 +96,9 @@ const ProductScreen = ({ navigation, route }) => {
         <View style={styles.priceContainer}>
           <Text style={styles.price}>U$D {productFound.price}</Text>
           <Pressable
-            onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}
+            onPress={() => {
+              dispatch(addItem({ ...productFound, quantity: 1 }));
+            }}
             style={({ pressed }) => [
               { opacity: pressed ? 0.8 : 1 },
               styles.addToCartButton,

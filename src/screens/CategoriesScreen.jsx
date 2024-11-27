@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCategory } from "../features/shop/shopSlice";
 import { useGetCategoriesQuery } from "../services/shopService";
 import { colors } from "../global/colors";
+import CategoryCard from "../components/CategoryCard";
 
 const CategoriesScreen = ({ navigation }) => {
   const { data: categories, error, isLoading } = useGetCategoriesQuery();
@@ -25,20 +26,16 @@ const CategoriesScreen = ({ navigation }) => {
           navigation.navigate("Productos");
         }}
       >
-        <FlatCard
+        <CategoryCard
+          source={item.image}
           style={
             index % 2 == 0
               ? { ...styles.categoryItemContainer, ...styles.rowReverse }
               : { ...styles.categoryItemContainer, ...styles.row }
           }
         >
-          <Image
-            source={{ uri: item.image }}
-            style={styles.image}
-            resizeMode="contain"
-          />
           <Text style={styles.categoryTitle}>{item.title}</Text>
-        </FlatCard>
+        </CategoryCard>
       </Pressable>
     );
   };
@@ -71,7 +68,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 10,
     marginVertical: 5,
-    padding: 20,
+    padding: 15,
   },
   categoryTitle: {
     fontSize: 23,
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: 150,
-    height: 130,
+    height: 160,
   },
   row: {
     flexDirection: "row",
