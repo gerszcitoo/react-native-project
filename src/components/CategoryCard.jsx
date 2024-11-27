@@ -8,7 +8,7 @@ const CategoryCard = ({ source, children, style }) => {
       source={image}
       resizeMode="cover"
       style={{ ...styles.cardContainer, ...style }}
-      blurRadius={3}
+      blurRadius={5}
     >
       {children}
     </ImageBackground>
